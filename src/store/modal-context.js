@@ -1,26 +1,37 @@
-import React, { useState } from 'react'
+import React, { createContext, useContext, useReducer } from 'react';
 
-export const ModalContext = React.createContext({
-	isModalOpen: false,
-	onClose: () => {},
-	onOpen: () => {},
-})
+const initialState = {
+  isModalOpen: false,
+};
+
+const modalReducer = (state, action) => {
+  switch (action.type) {
+    case 'OPEN_MODAL':
+      return { isModalOpen: true };
+    case 'CLOSE_MODAL':
+      return { isModalOpen: false };
+    default:
+      return state;
+  }
+};
+
+export const ModalContext = createContext();
 
 export const ModalProvider = ({ children }) => {
-	const [isOpen, setIsOpen] = useState(false)
+  const [modalState, dispatch] = useReducer(modalReducer, initialState);
 
-	const openModalHandler = () => setIsOpen(true)
-	const closeModalHandler = () => setIsOpen(false)
+  const openModalHandler = () => dispatch({ type: 'OPEN_MODAL' });
+  const closeModalHandler = () => dispatch({ type: 'CLOSE_MODAL' });
 
-	return (
-		<ModalContext.Provider
-			value={{
-				isModalOpen: isOpen,
-				onClose: closeModalHandler,
-				onOpen: openModalHandler,
-			}}
-		>
-			{children}
-		</ModalContext.Provider>
-	)
-}
+  return (
+    <ModalContext.Provider
+      value={{
+        isModalOpen: modalState.isModalOpen,
+        onClose: closeModalHandler,
+        onOpen: openModalHandler,
+      }}
+    >
+      {children}
+    </ModalContext.Provider>
+  );
+};
