@@ -1,19 +1,31 @@
-import React, { useState } from 'react'
+import React, { useReducer } from 'react'
 import { styled } from 'styled-components'
 import { Button } from '../../UI/Button'
 import { PlusIcon } from '../../../assets'
 
-export const MealItemForm = ({ inputId, onAddMeal }) => {
-	const [enteredAmount, setEnteredAmount] = useState(1)
-	const amountChangeHnadler = (e) => {
-		setEnteredAmount(Number(e.target.value))
+
+const amountReducer = (state, action) => {
+	switch (action.type) {
+	  case 'CHANGE':
+		return { enteredAmount: Number(action.value) };
+	  case 'RESET':
+		return { enteredAmount: 1 };
+	  default:
+		return state;
 	}
+  };
+
+export const MealItemForm = ({ inputId, onAddMeal }) => {
+	const [amountState, dispatchAmount] = useReducer(amountReducer, {
+		enteredAmount: 1,
+	  });
+	const amountChangeHnadler = (e) => {
+		dispatchAmount({ type: 'CHANGE', value: e.target.value });	}
 
 	const submitHandler = (e) => {
 		e.preventDefault()
-		onAddMeal(enteredAmount)
-		setEnteredAmount(1)
-	}
+		onAddMeal(amountState.enteredAmount)
+		dispatchAmount({ type: 'RESET' });	}
 
 	return (
 		<FormContainer onSubmit={submitHandler}>
@@ -24,7 +36,7 @@ export const MealItemForm = ({ inputId, onAddMeal }) => {
 					id={inputId}
 					min='1'
 					max='5'
-					value={enteredAmount}
+					value={amountState.enteredAmount}
 					onChange={amountChangeHnadler}
 				/>
 			</InputWrapper>
