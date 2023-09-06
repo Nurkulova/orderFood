@@ -1,13 +1,17 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import { styled } from 'styled-components'
 import { IconButton } from '../UI/IconButton'
 import { MinusIcon, PlusIcon } from '../../assets'
+import { CartContext } from '../../store/cart-context'
 
 export const CartItem = ({
 	title = 'Название блюда',
 	price = 22.99,
 	amount = 5,
+	id,
 }) => {
+	const {onIncreaseMealAmount,onDecreaseMealAmount} = useContext(CartContext)
+
 	return (
 		<ListItem>
 			<Content>
@@ -18,8 +22,12 @@ export const CartItem = ({
 				</PriceContainer>
 			</Content>
 			<ActionsContainer>
-				<IconButton Icon={MinusIcon} />
-				<IconButton Icon={PlusIcon} />
+				<IconButton 
+				 Icon={MinusIcon} 
+				 onClick={()=>onDecreaseMealAmount(id)} />
+				<IconButton
+				 Icon={PlusIcon}
+				 onClick={()=>onIncreaseMealAmount(id)} />
 			</ActionsContainer>
 		</ListItem>
 	)
