@@ -58,4 +58,3 @@ const ModalContainer = styled('div')`
 		}
 	}
 `
-

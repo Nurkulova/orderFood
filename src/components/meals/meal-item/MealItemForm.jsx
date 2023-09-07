@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { styled } from 'styled-components'
-import { Button } from '../../UI/Button'
+import MaterialUIButton from '../../UI/MaterialUIButton'; 
 import { PlusIcon } from '../../../assets'
 
 
@@ -31,9 +31,9 @@ export const MealItemForm = ({ inputId,onAddMeal}) => {
 					onChange={amountChangeHnadler}
 				/>
 			</InputWrapper>
-			<Button IconComponent={PlusIcon} size='small'>
+			<MaterialUIButton IconComponent={PlusIcon} size='small'>
 				Add
-			</Button>
+			</MaterialUIButton>
 		</FormContainer>
 	)
 }

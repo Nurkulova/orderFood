@@ -1,6 +1,6 @@
 import React,{useContext} from 'react'
 import { styled } from 'styled-components'
-import { IconButton } from '../UI/IconButton'
+import {IconButton} from '../UI/IconButton'
 import { MinusIcon, PlusIcon } from '../../assets'
 import { CartContext } from '../../store/cart-context'
 

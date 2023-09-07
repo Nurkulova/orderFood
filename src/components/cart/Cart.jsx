@@ -3,7 +3,7 @@ import { Modal } from '../UI/Modal'
 import { CartItem } from './CartItem'
 import { styled } from 'styled-components'
 import { TotalAmount } from './TotalAmount'
-import { Button } from '../UI/Button'
+import MaterialUIButton from '../UI/MaterialUIButton'; 
 import { CartContext } from '../../store/cart-context'
 
 
@@ -115,10 +115,10 @@ export const Cart = ({ onClose }) => {
 				</CartList>
 				<TotalAmount totalAmount={totalAmount} />
 				<ActionsContainer>
-					<Button variant='outlined' onClick={onClose}>
+					<MaterialUIButton variant='outlined' onClick={onClose}>
 						Close
-					</Button>
-					<Button onClick={() => console.log('ORDER')}>Order</Button>
+					</MaterialUIButton>
+					<MaterialUIButton onClick={() => console.log('ORDER')}>Order</MaterialUIButton>
 				</ActionsContainer>
 			</Content>
 		</Modal>

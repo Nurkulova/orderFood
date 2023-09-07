@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from './Button'
+import MaterialUIButton from './MaterialUIButton'
 import { styled } from 'styled-components'
 
 export const IconButton = ({ Icon, onClick, type = 'button', disabled }) => {
@@ -15,7 +15,7 @@ export const IconButton = ({ Icon, onClick, type = 'button', disabled }) => {
 	)
 }
 
-const StyledButton = styled(Button)`
+const StyledButton = styled(MaterialUIButton)`
 	border-radius: 6px;
 	padding: 0.5rem 0.875rem;
 	display: grid;
@@ -26,3 +26,5 @@ const StyledButton = styled(Button)`
 		stroke: white;
 	}
 `
+
+
