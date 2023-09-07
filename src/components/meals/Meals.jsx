@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect,useState } from 'react'
 import { styled } from 'styled-components'
 import { MealItem } from './meal-item/MealItem'
 
@@ -30,17 +30,40 @@ const DUMMY_MEALS = [
 ]
 
 export const Meals = () => {
+
+	const [meals,setMeals] = useState([])
+
+	useEffect(() => {
+		const fetchMeals = async () =>{
+			try {
+				const response = await fetch ('http://ec2-3-76-44-71.eu-central-1.compute.amazonaws.com:5500/api/v1/foods',
+				{
+					headers:{
+						UserId:'Cholpon',
+					}
+				}
+				);
+				const result = await response.json()
+				setMeals(result.data)
+				console.log(result.data);
+			}
+			catch (error){
+				console.log(error);
+			}
+		}
+		fetchMeals()
+	}, [])
 	return (
 		<Container>
 			<ul>
-				{DUMMY_MEALS.map((meal) => {
+				{meals.map((meal) => {
 					return (
 						<MealItem
-							key={meal.id}
+							key={meal._id}
 							title={meal.title}
 							description={meal.description}
 							price={meal.price}
-							id={meal.id}
+							id={meal._id}
 						/>
 					)
 				})}

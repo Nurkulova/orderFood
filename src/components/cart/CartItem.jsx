@@ -9,8 +9,11 @@ export const CartItem = ({
 	price = 22.99,
 	amount = 5,
 	id,
+	onIncreaseMealAmount,
+	onDecreaseMealAmount,
 }) => {
-	const {onIncreaseMealAmount,onDecreaseMealAmount} = useContext(CartContext)
+	// const {onIncreaseMealAmount,onDecreaseMealAmount} = useContext(CartContext)
+
 
 	return (
 		<ListItem>
@@ -24,10 +27,10 @@ export const CartItem = ({
 			<ActionsContainer>
 				<IconButton 
 				 Icon={MinusIcon} 
-				 onClick={()=>onDecreaseMealAmount(id)} />
+				 onClick={()=>onDecreaseMealAmount(id,amount)} />
 				<IconButton
 				 Icon={PlusIcon}
-				 onClick={()=>onIncreaseMealAmount(id)} />
+				 onClick={()=>onIncreaseMealAmount(id,amount)} />
 			</ActionsContainer>
 		</ListItem>
 	)

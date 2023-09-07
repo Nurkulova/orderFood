@@ -1,17 +1,24 @@
 import React, { useContext } from 'react'
 import { styled } from 'styled-components'
 import { MealItemForm } from './MealItemForm'
-import { CartContext } from '../../../store/cart-context'
 
 export const MealItem = ({ title, description, price, id }) => {
-	const { onAddMeal } = useContext(CartContext)
-	const addMealToCartHandler = (amount) => {
-		onAddMeal({
-			title,
-			price,
-			amount,
-			id,
-		})
+	const addMealToCartHandler = async (amount) => {
+		try {
+			const response = await fetch(`http://ec2-3-76-44-71.eu-central-1.compute.amazonaws.com:5500/api/v1/foods/${id}/addToBasket`,
+			{
+				method:'POST',
+				headers:{
+					UserId:'Cholpon',
+					'Content-Type':	'application/json',			},
+				body:JSON.stringify({amount}),
+			},
+			)	
+			const result = await response.json()
+			console.log(result);
+		} catch (error) {
+			console.log(error);
+		}
 	}
 	return (
 		<ListItem>

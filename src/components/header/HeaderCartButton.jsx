@@ -11,6 +11,7 @@ export const HeaderCartButton = () => {
 	const [bump, setBump] = useState('')
 
 	const addedMealsCount = addedMeals.reduce((acc, meal) => {
+		console.log(acc + meal.amount)
 		return acc + meal.amount
 	}, 0)
 
@@ -25,7 +26,7 @@ export const HeaderCartButton = () => {
 		<StyledButton onClick={onOpen} className={bump}>
 			<BasketIcon />
 			<span className='bump'>Your cart</span>
-			<Badge>{addedMealsCount}</Badge>
+			<Badge>{addedMeals} </Badge>
 		</StyledButton>
 	)
 }

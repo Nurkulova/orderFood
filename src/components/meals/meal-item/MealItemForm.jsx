@@ -1,17 +1,20 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { styled } from 'styled-components'
 import { Button } from '../../UI/Button'
 import { PlusIcon } from '../../../assets'
 
-export const MealItemForm = ({ inputId, onAddMeal }) => {
+
+export const MealItemForm = ({ inputId,onAddMeal}) => {
 	const [enteredAmount, setEnteredAmount] = useState(1)
 	const amountChangeHnadler = (e) => {
 		setEnteredAmount(Number(e.target.value))
+		console.log(e.target.value)
 	}
 
 	const submitHandler = (e) => {
 		e.preventDefault()
 		onAddMeal(enteredAmount)
+		
 		setEnteredAmount(1)
 	}
 
@@ -63,5 +66,6 @@ const InputWrapper = styled('div')`
 		font-size: 1rem;
 		font-weight: 600;
 		font-family: inherit;
+		min-width:4rem;
 	}
 `
